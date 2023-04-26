@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ethlo.unece</groupId>
     <artifactId>jaxb2-sbdh</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <name>JAXB2 SBDH bindings</name>
     <description>Generated JAXB2 classes based on the unece.org Standard Business Document Header specification
     </description>
@@ -46,7 +46,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxb2-maven-plugin</artifactId>
-                <version>2.5.0</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>xjc</id>
@@ -59,9 +59,28 @@
                     <laxSchemaValidation>true</laxSchemaValidation>
                     <sources>
                         <source>src/main/resources</source>
-                    </sources>
+                    </sources><arguments>
+                    <argument>-Xfluent-api</argument>
+                    <argument>-XJsr303Annotations:validationAnnotations=jakarta</argument>
+                </arguments>
                 </configuration>
                 <dependencies>
+                    <dependency>
+                        <groupId>net.java.dev.jaxb2-commons</groupId>
+                        <artifactId>jaxb-fluent-api</artifactId>
+                        <version>2.1.8</version>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>com.sun.xml</groupId>
+                                <artifactId>jaxb-xjc</artifactId>
+                            </exclusion>
+                        </exclusions>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.fillumina</groupId>
+                        <artifactId>krasa-jaxb-tools</artifactId>
+                        <version>2.2</version>
+                    </dependency>
                     <dependency>
                         <groupId>org.glassfish.jaxb</groupId>
                         <artifactId>jaxb-xjc</artifactId>
